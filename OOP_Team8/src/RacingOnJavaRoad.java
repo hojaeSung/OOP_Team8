@@ -1,8 +1,11 @@
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.applet.*;
 
 public class RacingOnJavaRoad {
 
-	
+	public static void main(String[] arr){
+		
+		FrameMake fms = new FrameMake();
+		
+	}
 }
