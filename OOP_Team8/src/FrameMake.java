@@ -23,7 +23,9 @@ class FrameMake extends JFrame implements KeyListener, Runnable{
 	Toolkit tk = Toolkit.getDefaultToolkit();
 
 	Image me_img = tk.getImage("src/car.png");
-
+	Image buffImage; //더블 버퍼링용
+	Graphics buffg; //더블 버퍼링용
+	
 	FrameMake() {
 
 		init();
@@ -86,16 +88,23 @@ class FrameMake extends JFrame implements KeyListener, Runnable{
 		}
 
 	}
+	public void paint(Graphics g){
 
-	public void paint(Graphics g) {
+		buffImage = createImage(f_width, f_height); 
+		//더블버퍼링 버퍼 크기를 화면 크기와 같게 설정
+		buffg = buffImage.getGraphics(); //버퍼의 그래픽 객체를 얻기
+		update(g);
+		}
 
-		g.clearRect(0, 0, f_width, f_height);
-
-		g.drawImage(me_img, x, y, this);
-
-		// 변경되는 좌표에 따라 이미지가 새로 그려지게 하기.
-
-	}
+		public void update(Graphics g){
+		Draw_Char();// 실제로 그려진 그림을 가져온다
+		g.drawImage(buffImage, 0, 0, this); 
+		// 화면에 버퍼에 그린 그림을 가져와 그리기
+		}
+		public void Draw_Char(){ // 실제로 그림들을 그릴 부분
+		buffg.clearRect(0, 0, f_width, f_height);
+		buffg.drawImage(me_img, x, y, this);
+		}
 
 	public void keyPressed(KeyEvent e) {
 
