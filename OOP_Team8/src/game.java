@@ -56,8 +56,11 @@ public class game extends JFrame implements KeyListener {
 			B.update();
 			B.draw(g);
 			if (B.yPos == this.getHeight()) {
+				
 				B2 = new BackGround(-600);
+				
 				BG.add(B2);
+				
 				BG.remove(B);
 			}
 		}
